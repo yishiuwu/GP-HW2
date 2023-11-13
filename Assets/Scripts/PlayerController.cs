@@ -1,0 +1,64 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.InputSystem;
+
+public class PlayerController : MonoBehaviour
+{
+    public float forwardSpeed = 10.0f;
+    public float backwardSpeed = 10.0f;
+    public float rotateSpeed = 2.0f;
+    private Animator animator;
+    private Rigidbody rb;
+
+    private int idleState;
+    private int runState;
+    private int attackState;
+
+    // Use this for initialization
+    void Start()
+    {
+        animator = gameObject.GetComponent<Animator>();
+        rb = gameObject.GetComponent<Rigidbody>();
+        idleState = Animator.StringToHash("Base Layer.Idle");
+        runState = Animator.StringToHash("Base Layer.Run");
+        attackState = Animator.StringToHash("Base Layer.Attack");
+    }
+
+    void FixedUpdate()
+    {
+        AnimatorStateInfo state = animator.GetCurrentAnimatorStateInfo(0);
+
+        // Get Input using the new Input System
+        float v = Keyboard.current.wKey.isPressed ? 1.0f : (Keyboard.current.sKey.isPressed ? -1.0f : 0.0f);
+        float h = Keyboard.current.aKey.isPressed ? -1.0f : (Keyboard.current.dKey.isPressed ? 1.0f : 0.0f);
+
+        animator.SetFloat("Speed", v);
+
+        Vector3 velocity = new Vector3(0.0f, 0.0f, v);
+
+        // Transform
+        gameObject.transform.Rotate(0, h * rotateSpeed, 0);
+
+        if (v < -0.1)
+        {
+            //gameObject.transform.Translate(velocity * backwardSpeed * Time.fixedDeltaTime);
+        }
+        else if (v > 0.1)
+        {
+            gameObject.transform.Translate(velocity * forwardSpeed * Time.fixedDeltaTime);
+        }
+
+        if (state.fullPathHash == runState)
+        {
+            if (Keyboard.current.spaceKey.isPressed)
+            {
+                animator.SetBool("Attack", true);
+            }
+        }
+        else if (state.fullPathHash == attackState)
+        {
+            animator.SetBool("Attack", false);
+        }
+    }
+}
