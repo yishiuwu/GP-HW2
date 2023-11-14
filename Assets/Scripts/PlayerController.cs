@@ -14,6 +14,9 @@ public class PlayerController : MonoBehaviour
     private int idleState;
     private int runState;
     private int attackState;
+    public AudioClip HurtSound;
+    private AudioSource myAudioSource;
+    public GameObject blood;
 
     // Use this for initialization
     void Start()
@@ -23,6 +26,7 @@ public class PlayerController : MonoBehaviour
         idleState = Animator.StringToHash("Base Layer.Idle");
         runState = Animator.StringToHash("Base Layer.Run");
         attackState = Animator.StringToHash("Base Layer.Attack");
+        myAudioSource = GetComponent<AudioSource>();
     }
 
     void FixedUpdate()
@@ -60,5 +64,17 @@ public class PlayerController : MonoBehaviour
         {
             animator.SetBool("Attack", false);
         }
+    }
+
+    void OnCollisionEnter(Collision other){
+        if(other.gameObject.tag=="Enemy"){
+            //Booming = true;
+            //GetComponent<Animator>().SetTrigger("attack01");
+            myAudioSource.PlayOneShot(HurtSound);
+            GameObject obj = Instantiate(blood,transform.position,transform.rotation);
+            Destroy(obj,5f);
+            //StartCoroutine(SelfDestroy());
+        }
+
     }
 }

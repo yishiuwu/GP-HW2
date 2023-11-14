@@ -14,6 +14,7 @@ public class SlimeEnemy : MonoBehaviour
     private bool isDashing = false;
     private float direction = 1f;
     private float distance = 0f;
+    public GameObject blood;
     // Start is called before the first frame update
     void Start()
     {
@@ -52,6 +53,8 @@ public class SlimeEnemy : MonoBehaviour
             // Debug.Log("Slime Attack!!");
             myAudioSource.PlayOneShot(AttackSound);
             StartCoroutine(WaitForCD(1.5f));
+            GameObject obj = Instantiate(blood,transform.position,transform.rotation);
+            Destroy(obj,5f);
         }
     }
     private void DetectAndDash(){

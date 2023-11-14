@@ -14,6 +14,7 @@ public class TurtleEnemy : MonoBehaviour
     private float distance = 0f;
     private bool attacking = false;
     private bool isCoolDown = false;
+    public GameObject blood;
     // Start is called before the first frame update
     void Start()
     {
@@ -68,5 +69,16 @@ public class TurtleEnemy : MonoBehaviour
     {
         yield return new WaitForSeconds(wait_time);
         isCoolDown = false;
+    }
+    void OnCollisionEnter(Collision other){
+        if(other.gameObject.tag=="Player"){
+            //Booming = true;
+            //GetComponent<Animator>().SetTrigger("attack01");
+            //myAudioSource.PlayOneShot(HurtSound);
+            GameObject obj = Instantiate(blood,transform.position,transform.rotation);
+            Destroy(obj,5f);
+            //StartCoroutine(SelfDestroy());
+        }
+
     }
 }
