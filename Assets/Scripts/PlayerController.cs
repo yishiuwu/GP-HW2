@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     public AudioClip HurtSound;
     private AudioSource myAudioSource;
     public GameObject blood;
+    public GameObject bomb;
 
     // Use this for initialization
     void Start()
@@ -58,6 +59,10 @@ public class PlayerController : MonoBehaviour
             if (Keyboard.current.spaceKey.isPressed)
             {
                 animator.SetBool("Attack", true);
+                GameObject obj = Instantiate(bomb,transform.position,transform.rotation);
+                Destroy(obj,5f);
+                // Check for nearby enemies and destroy them
+                DestroyNearbyEnemies();
             }
         }
         else if (state.fullPathHash == attackState)
@@ -77,4 +82,27 @@ public class PlayerController : MonoBehaviour
         }
 
     }
+
+    void DestroyNearbyEnemies()
+{
+    // Define the attack range
+    float attackRange = 3.0f;
+
+    // Find all colliders within the attack range
+    Collider[] colliders = Physics.OverlapSphere(transform.position, attackRange);
+
+    foreach (Collider col in colliders)
+    {
+        if (col.gameObject.tag == "Enemy")
+        {
+            // Destroy the enemy
+            Destroy(col.gameObject);
+
+            // Play a sound or perform other actions if needed
+            // For example, you can instantiate a blood effect
+            // GameObject bloodObj = Instantiate(blood, col.transform.position, col.transform.rotation);
+            // Destroy(bloodObj, 5f);
+        }
+    }
+}
 }
