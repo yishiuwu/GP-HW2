@@ -10,7 +10,7 @@ public class ScoreControl : MonoBehaviour
     [SerializeField] TextMeshProUGUI scoreText;
     // public TextMeshProUGUI scoreText;
     
-    int score;
+    public int score;
 
     void Awake(){
         int scoreSingleton = FindObjectsOfType<ScoreControl>().Length;
@@ -26,6 +26,16 @@ public class ScoreControl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        scoreText.text = score.ToString();
+    }
+
+    public void ResetScore(){
+        score = 0;
+        scoreText.text = score.ToString();;
+    }
+
+    public void AddScore(int add){
+        score += add;
         scoreText.text = score.ToString();;
     }
 
