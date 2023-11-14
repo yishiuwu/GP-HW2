@@ -12,17 +12,6 @@ public class ScoreControl : MonoBehaviour
     
     public int score;
 
-    void Awake(){
-        int scoreSingleton = FindObjectsOfType<ScoreControl>().Length;
-        if(scoreSingleton > 1){
-            gameObject.SetActive(false);
-            Destroy(gameObject);
-        }
-        else{
-            DontDestroyOnLoad(gameObject);
-        }
-    }
-
     // Start is called before the first frame update
     void Start()
     {
