@@ -10,7 +10,7 @@ public class ScoreControl : MonoBehaviour
     [SerializeField] TextMeshProUGUI scoreText;
     // public TextMeshProUGUI scoreText;
     
-    public int score;
+    public static int score;
 
     // Start is called before the first frame update
     void Start()
@@ -20,18 +20,16 @@ public class ScoreControl : MonoBehaviour
 
     public void ResetScore(){
         score = 0;
-        scoreText.text = score.ToString();;
     }
 
-    public void AddScore(int add){
+    public static void AddScore(int add){
         score += add;
-        scoreText.text = score.ToString();;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        scoreText.text = score.ToString();
     }
 
     public void testGetScore10(){

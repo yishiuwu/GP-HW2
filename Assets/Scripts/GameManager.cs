@@ -1,12 +1,15 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public static event Action onGameWin;
+    public static event Action onGameLose;
     public Player player;
-    public SceneTransition sceneTransition;
-
+    public static SceneTransition sceneTransition;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -20,16 +23,18 @@ public class GameManager : MonoBehaviour
     }
 
     public static void NextStage(string stageName) {
-
+        sceneTransition.outColor = Color.white;
+        sceneTransition.ChangeScene(stageName);
     }
     public static void Win() {
-
+        onGameWin?.Invoke();
     }
     public static void Lose() {
-
+        onGameLose?.Invoke();
     }
-    void End() {
-
+    public static void End() {
+        sceneTransition.outColor = Color.black;
+        sceneTransition.ChangeScene("MainMenu");
     }
 
 }
