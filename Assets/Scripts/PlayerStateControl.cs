@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class PlayerStateControl : MonoBehaviour
 {
-    public float playerHP;
-    public float maxPlayerHP = 100;
+    public static float playerHP;
+    public static float maxPlayerHP = 100;
     public Image greenHP;
     public Image redHP;
 
@@ -19,27 +19,18 @@ public class PlayerStateControl : MonoBehaviour
         ResetPlayerHP();
     }
 
-    public void ResetPlayerHP(){
+    public static void ResetPlayerHP(){
         playerHP = maxPlayerHP;
-        ShowUpHP = greenHP;
-        ClosedHP = redHP;
-        ManageShowUpHP();
     }
 
     public static void AddPlayerHP(float hp){
+        Debug.Log(hp);
         playerHP += hp;
-        if(playerHP / maxPlayerHP <= 0.2f){
-            ShowUpHP = redHP;
-            ClosedHP = greenHP;
-        }
-        else{
-            ShowUpHP = greenHP;
-            ClosedHP = redHP;
-        }
-        ManageShowUpHP();
     }
 
     void ManageShowUpHP(){
+        ShowUpHP = (playerHP / maxPlayerHP <= 0.2f)?redHP:greenHP;
+        ClosedHP = (playerHP / maxPlayerHP <= 0.2f)?greenHP:redHP;
         ShowUpHP.enabled = true;
         ClosedHP.enabled = false;
         ShowUpHP.GetComponent<Image>().fillAmount = Mathf.Lerp(0, 1, playerHP / maxPlayerHP);
@@ -48,7 +39,7 @@ public class PlayerStateControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        ManageShowUpHP();
     }
 
     public void testAddHP10(){

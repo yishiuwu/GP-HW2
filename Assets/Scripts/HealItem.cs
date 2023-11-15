@@ -2,10 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Item : MonoBehaviour
+public class HealItem : MonoBehaviour
 {
     public float addHP = 20;
-
     public event System.Action modifyPlayerHP;
 
     // Start is called before the first frame update
@@ -23,7 +22,7 @@ public class Item : MonoBehaviour
     }
 
     void OnTriggerEnter(Collider other){
-        if(other.gameObject.tag=="player"){
+        if(other.gameObject.tag=="Player"){
             Debug.Log("item");
             modifyPlayerHP.Invoke();
             Destroy(gameObject);
