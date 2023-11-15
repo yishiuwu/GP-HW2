@@ -45,7 +45,7 @@ public class BombEnemy : MonoBehaviour
             Booming = true;
             moveSpeed = 6f;
             GetComponent<Animator>().SetTrigger("attack01");
-            myAudioSource.PlayOneShot(BombSound);
+            AudioSystem.PlaySE(BombSound);
             StartCoroutine(SelfDestroy());
         }
 

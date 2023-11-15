@@ -51,7 +51,7 @@ public class TurtleEnemy : MonoBehaviour
         }
     }
     private void PlayAttackSound(){
-        myAudioSource.PlayOneShot(AttackSound);
+        AudioSystem.PlaySE(AttackSound);
         Debug.Log("attacking");
         isCoolDown = true;
         StartCoroutine(WaitForCoolDown(2f));
