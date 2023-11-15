@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     public Player player;
     public static SceneTransition sceneTransition;
     
+    
     // Start is called before the first frame update
     void Start()
     {
