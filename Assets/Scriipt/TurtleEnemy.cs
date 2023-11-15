@@ -23,8 +23,10 @@ public class TurtleEnemy : MonoBehaviour
     void Start()
     {
         myAudioSource = GetComponent<AudioSource>();
-        hurtPlayer += () => {player.GetComponent<PlayerController>().Hurt();};
-        hurtPlayer += () => {PlayerStateControl.AddPlayerHP(subHP);};
+        hurtPlayer += () => {
+            player.GetComponent<PlayerController>().Hurt();
+            PlayerStateControl.AddPlayerHP(subHP);
+        };
     }
 
     // Update is called once per frame

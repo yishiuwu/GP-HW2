@@ -19,6 +19,7 @@ public class ScoreControl : MonoBehaviour
             ResetScore();
             
         scoreText.text = score.ToString();
+        GameManager.onGameRestart += ResetScore;
     }
 
     public void ResetScore(){

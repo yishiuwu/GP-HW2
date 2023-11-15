@@ -7,8 +7,10 @@ public class GameManager : MonoBehaviour
 {
     public static event Action onGameWin;
     public static event Action onGameLose;
+    public static event Action onGameRestart;
     public UnityEngine.Object player;
     public static SceneTransition sceneTransition;
+    public static bool isEnd = false;
     
     
     // Start is called before the first frame update
@@ -29,11 +31,21 @@ public class GameManager : MonoBehaviour
     }
     public static void Win() {
         onGameWin?.Invoke();
+        onGameWin = null;
+        isEnd = true;
     }
     public static void Lose() {
         onGameLose?.Invoke();
+        onGameLose = null;
+        isEnd = true;
+    }
+    public static void Restart() {
+        onGameRestart?.Invoke();
+        // onGameRestart = null;
+        sceneTransition.ChangeScene("scene1");
     }
     public static void End() {
+        onGameRestart?.Invoke();
         sceneTransition.outColor = Color.black;
         sceneTransition.ChangeScene("MainMenu");
     }

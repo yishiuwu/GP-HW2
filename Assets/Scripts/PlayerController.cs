@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -21,6 +23,8 @@ public class PlayerController : MonoBehaviour
     public int addScore = 20;
     public event System.Action modifyScore;
 
+    private static bool isEnd = false;
+
     // Use this for initialization
     void Start()
     {
@@ -30,14 +34,30 @@ public class PlayerController : MonoBehaviour
         runState = Animator.StringToHash("Base Layer.Run");
         attackState = Animator.StringToHash("Base Layer.Attack");
         myAudioSource = GetComponent<AudioSource>();
+        StaticStart();
+
+        GameManager.onGameLose += ()=>{this.rb.velocity = Vector3.zero;};
+        GameManager.onGameWin += ()=>{this.rb.velocity = Vector3.zero;};
 
         modifyScore += () => {
             ScoreControl.AddScore(addScore);
         };
     }
 
+    static void StaticStart() {
+        GameManager.onGameLose += ()=>{isEnd = true;};
+        GameManager.onGameWin += ()=>{isEnd = true;};
+        GameManager.onGameRestart += ()=>{isEnd = false;};
+    }
+
+    private void OnDestroy() {
+        GameManager.onGameLose -= ()=>{this.rb.velocity = Vector3.zero;};
+        GameManager.onGameWin -= ()=>{this.rb.velocity = Vector3.zero;};
+    }
+
     void FixedUpdate()
     {
+        if (isEnd) return;
         AnimatorStateInfo state = animator.GetCurrentAnimatorStateInfo(0);
 
         // Get Input using the new Input System
@@ -73,6 +93,7 @@ public class PlayerController : MonoBehaviour
     }
 
     public void Hurt(){
+        if (isEnd) return;
         AudioSystem.PlaySE(HurtSound);
         GameObject obj = Instantiate(blood,transform.position,transform.rotation);
         Destroy(obj,5f);
@@ -92,25 +113,26 @@ public class PlayerController : MonoBehaviour
     // }
 
     void DestroyNearbyEnemies()
-{
-    // Define the attack range
-    float attackRange = 3.0f;
-
-    // Find all colliders within the attack range
-    Collider[] colliders = Physics.OverlapSphere(transform.position, attackRange);
-
-    foreach (Collider col in colliders)
     {
-        if (col.gameObject.tag == "Enemy")
+        if (isEnd) return;
+        // Define the attack range
+        float attackRange = 3.0f;
+
+        // Find all colliders within the attack range
+        Collider[] colliders = Physics.OverlapSphere(transform.position, attackRange);
+
+        foreach (Collider col in colliders)
         {
-            // Destroy the enemy
-            Destroy(col.gameObject);
-            modifyScore?.Invoke();
-            // Play a sound or perform other actions if needed
-            // For example, you can instantiate a blood effect
-            // GameObject bloodObj = Instantiate(blood, col.transform.position, col.transform.rotation);
-            // Destroy(bloodObj, 5f);
+            if (col.gameObject.tag == "Enemy")
+            {
+                // Destroy the enemy
+                Destroy(col.gameObject);
+                modifyScore?.Invoke();
+                // Play a sound or perform other actions if needed
+                // For example, you can instantiate a blood effect
+                // GameObject bloodObj = Instantiate(blood, col.transform.position, col.transform.rotation);
+                // Destroy(bloodObj, 5f);
+            }
         }
     }
-}
 }

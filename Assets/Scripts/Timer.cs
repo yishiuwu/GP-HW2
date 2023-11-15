@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 public class Timer : MonoBehaviour
 {
@@ -11,34 +12,45 @@ public class Timer : MonoBehaviour
     public float timer;
     public float maxTime = 300;
     public bool start_timer;
+    private static bool isEnd = false;
 
     // Start is called before the first frame update
     void Start()
     {
         timer = maxTime;
         start_timer = true;
+        StartCoroutine(TimerCoroutine());
+        GameManager.onGameLose += ()=>{StopCoroutine(TimerCoroutine());};
+        GameManager.onGameWin += ()=>{StopCoroutine(TimerCoroutine());};
+        StaticStart();
+    }
+
+    static void StaticStart() {
+        GameManager.onGameLose += ()=>{isEnd = true;};
+        GameManager.onGameWin += ()=>{isEnd = true;};
+        GameManager.onGameRestart += ()=>{isEnd = false;};
+    }
+
+    private void OnDestroy() {
+        GameManager.onGameLose -= ()=>{StopCoroutine(TimerCoroutine());};
+        GameManager.onGameWin -= ()=>{StopCoroutine(TimerCoroutine());};
     }
 
     public void ResetTimer(){
         timer = maxTime;
     }
 
-    IEnumerator timerCoroutine(){
-        yield return new WaitForSeconds(1);
-        timer -= 1;
-        if(timer > 0)
-            start_timer = true;
-        else
-            GameManager.Lose();
+    IEnumerator TimerCoroutine(){
+        while (timer > 0) {
+            timer -= 1;
+            yield return new WaitForSeconds(1);
+        }
+        GameManager.Lose();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(start_timer){
-            StartCoroutine("timerCoroutine");
-            start_timer = false;
-        }
         timerText.text = timer.ToString();
         timerImage.GetComponent<Image>().fillAmount = Mathf.Lerp(0, 1, timer / maxTime);
     }

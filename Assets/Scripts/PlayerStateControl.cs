@@ -19,6 +19,7 @@ public class PlayerStateControl : MonoBehaviour
     {
         if(SceneManager.GetActiveScene().name == "scene1")
             ResetPlayerHP();
+        GameManager.onGameRestart += ResetPlayerHP;
     }
 
     public static void ResetPlayerHP(){
