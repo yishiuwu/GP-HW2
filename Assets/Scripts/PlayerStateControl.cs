@@ -26,6 +26,9 @@ public class PlayerStateControl : MonoBehaviour
     public static void AddPlayerHP(float hp){
         Debug.Log(hp);
         playerHP += hp;
+        if (playerHP <= 0) {
+            GameManager.Lose();
+        }
     }
 
     void ManageShowUpHP(){

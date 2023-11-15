@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public event System.Action OnGameWin;
-    public event System.Action OnGameLose;
+    public static event Action onGameWin;
+    public static event Action onGameLose;
     public Player player;
     public static SceneTransition sceneTransition;
     
@@ -26,12 +26,12 @@ public class GameManager : MonoBehaviour
         sceneTransition.outColor = Color.white;
         sceneTransition.ChangeScene(stageName);
     }
-    // public static void Win() {
-
-    // }
-    // public static void Lose() {
-
-    // }
+    public static void Win() {
+        onGameWin?.Invoke();
+    }
+    public static void Lose() {
+        onGameLose?.Invoke();
+    }
     public static void End() {
         sceneTransition.outColor = Color.black;
         sceneTransition.ChangeScene("MainMenu");
