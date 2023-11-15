@@ -12,15 +12,28 @@ public class WinMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (isWinMenu) GameManager.onGameWin += () => {gameObject.SetActive(true);};
-        else GameManager.onGameLose += () => {gameObject.SetActive(true);};
+        if (isWinMenu) GameManager.onGameWin += CallOnWin;
+        else GameManager.onGameLose += CallOnLose;
+        GameManager.onStageChange += () => {
+            if (isWinMenu) GameManager.onGameWin -= CallOnWin;
+            else GameManager.onGameLose -= CallOnLose;
+        };
         gameObject.SetActive(false);
-        if (winText) StartCoroutine(TextColorChange());
+        // if (winText) StartCoroutine(TextColorChange());
     }
 
-    private void OnDestroy() {
-        if (isWinMenu) GameManager.onGameWin -= () => {gameObject.SetActive(true);};
-        else GameManager.onGameLose -= () => {gameObject.SetActive(true);};
+    // private void OnDestroy() {
+    //     if (isWinMenu) GameManager.onGameWin -= () => {gameObject.SetActive(true);};
+    //     else GameManager.onGameLose -= () => {gameObject.SetActive(true);};
+    // }
+
+    void CallOnWin() {
+        gameObject.SetActive(true);
+        StartCoroutine(TextColorChange());
+    }
+    void CallOnLose() {
+        gameObject.SetActive(true);
+
     }
 
     // Update is called once per frame

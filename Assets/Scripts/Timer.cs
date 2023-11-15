@@ -20,8 +20,13 @@ public class Timer : MonoBehaviour
         timer = maxTime;
         start_timer = true;
         StartCoroutine(TimerCoroutine());
-        GameManager.onGameLose += ()=>{StopCoroutine(TimerCoroutine());};
-        GameManager.onGameWin += ()=>{StopCoroutine(TimerCoroutine());};
+        GameManager.onGameLose += CallOnEnd;
+        GameManager.onGameWin += CallOnEnd;
+        GameManager.onStageChange += ()=>{
+            Debug.Log("timer destroy");
+            GameManager.onGameLose -= CallOnEnd;
+            GameManager.onGameWin -= CallOnEnd;
+        };
         StaticStart();
     }
 
@@ -31,10 +36,15 @@ public class Timer : MonoBehaviour
         GameManager.onGameRestart += ()=>{isEnd = false;};
     }
 
-    private void OnDestroy() {
-        GameManager.onGameLose -= ()=>{StopCoroutine(TimerCoroutine());};
-        GameManager.onGameWin -= ()=>{StopCoroutine(TimerCoroutine());};
+    void CallOnEnd() {
+        StopAllCoroutines();
     }
+
+    // private void OnDestroy() {
+    //     Debug.Log("timer destroy");
+    //     GameManager.onGameLose -= ()=>{StopAllCoroutines();};
+    //     GameManager.onGameWin -= ()=>{StopAllCoroutines();};
+    // }
 
     public void ResetTimer(){
         timer = maxTime;

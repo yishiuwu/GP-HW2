@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     public static event Action onGameWin;
     public static event Action onGameLose;
     public static event Action onGameRestart;
+    public static event Action onStageChange;
     public UnityEngine.Object player;
     public static SceneTransition sceneTransition;
     public static bool isEnd = false;
@@ -26,6 +27,8 @@ public class GameManager : MonoBehaviour
     }
 
     public static void NextStage(string stageName) {
+        onStageChange?.Invoke();
+        onStageChange = null;
         sceneTransition.outColor = Color.white;
         sceneTransition.ChangeScene(stageName);
     }
