@@ -149,7 +149,7 @@ MonoBehaviour:
   timerImage: {fileID: 274470418896354426}
   timerText: {fileID: 274470419069441738}
   timer: 0
-  maxTime: 300
+  maxTime: 60
   start_timer: 0
 --- !u!1 &274470418896354425
 GameObject:
@@ -399,7 +399,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 117, y: 194}
+  m_AnchoredPosition: {x: 92, y: 194}
   m_SizeDelta: {x: 199.9948, y: 201.2983}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &274470419318411932

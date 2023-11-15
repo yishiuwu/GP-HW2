@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class PlayerStateControl : MonoBehaviour
 {
     public static float playerHP;
-    public static float maxPlayerHP = 100;
+    public static float maxPlayerHP = 50;
     public Image greenHP;
     public Image redHP;
 
