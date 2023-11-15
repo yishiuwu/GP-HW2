@@ -34,7 +34,7 @@ public class TurtleEnemy : MonoBehaviour
     {
         DetectPlayer();
         distance+=Time.deltaTime;
-        if(attacking){
+        if(player && attacking){
             distance = 0;
             Vector3 faceDirection = (player.transform.position - transform.position).normalized;
             Quaternion targetRotation = Quaternion.LookRotation(faceDirection);
@@ -66,6 +66,7 @@ public class TurtleEnemy : MonoBehaviour
         StartCoroutine(WaitForCoolDown(2f));
     }
     private void DetectPlayer(){
+        if (player == null) return;
         float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
         if(distanceToPlayer < detectRadius){
             attacking = true;

@@ -31,7 +31,7 @@ public class BombEnemy : MonoBehaviour
     {
         DetectAndDash();
 
-        if(isDashing){
+        if(player && isDashing){
             moveDirection = (player.transform.position - transform.position).normalized;
             Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
             transform.rotation = targetRotation;
@@ -39,7 +39,7 @@ public class BombEnemy : MonoBehaviour
             if(!Booming)GetComponent<Animator>().SetBool("walk", true);
         }
         if(!isDashing || Booming) GetComponent<Animator>().SetBool("walk", false);
-        float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
+        float distanceToPlayer = player?Vector3.Distance(transform.position, player.transform.position):100;
         if(distanceToPlayer > 30f) isDashing = false;
 
         
@@ -55,6 +55,7 @@ public class BombEnemy : MonoBehaviour
 
     }
     private void DetectAndDash(){
+        if (player == null) return;
         float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
         if(distanceToPlayer < detectRadius){
             // Debug.Log("Detected player");

@@ -65,6 +65,7 @@ public class SlimeEnemy : MonoBehaviour
         }
     }
     private void DetectAndDash(){
+        if (player == null) return;
         float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
         if(distanceToPlayer < detectRadius){
             // Debug.Log("Detected player");
