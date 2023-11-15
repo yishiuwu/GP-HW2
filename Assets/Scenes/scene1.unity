@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028331, g: 0.2257133, b: 0.3069217, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2267,7 +2267,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 058b93da7ac5c1c48b895020a8366984, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -4136,67 +4136,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4737365782299246, guid: 0509744eed6f16e4c98e542f790a84b5, type: 3}
   m_PrefabInstance: {fileID: 1814310432}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &1815805566
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4671468706410756316, guid: 3022f75936327b647a17e48e3d506366, type: 3}
-      propertyPath: m_RootOrder
-      value: 14
-      objectReference: {fileID: 0}
-    - target: {fileID: 4671468706410756316, guid: 3022f75936327b647a17e48e3d506366, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -3.781077
-      objectReference: {fileID: 0}
-    - target: {fileID: 4671468706410756316, guid: 3022f75936327b647a17e48e3d506366, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 2.515417
-      objectReference: {fileID: 0}
-    - target: {fileID: 4671468706410756316, guid: 3022f75936327b647a17e48e3d506366, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -3.5721035
-      objectReference: {fileID: 0}
-    - target: {fileID: 4671468706410756316, guid: 3022f75936327b647a17e48e3d506366, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4671468706410756316, guid: 3022f75936327b647a17e48e3d506366, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4671468706410756316, guid: 3022f75936327b647a17e48e3d506366, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4671468706410756316, guid: 3022f75936327b647a17e48e3d506366, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4671468706410756316, guid: 3022f75936327b647a17e48e3d506366, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4671468706410756316, guid: 3022f75936327b647a17e48e3d506366, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4671468706410756316, guid: 3022f75936327b647a17e48e3d506366, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4671468706410756318, guid: 3022f75936327b647a17e48e3d506366, type: 3}
-      propertyPath: m_Name
-      value: BGMManager
-      objectReference: {fileID: 0}
-    - target: {fileID: 7466779499521119022, guid: 3022f75936327b647a17e48e3d506366, type: 3}
-      propertyPath: audioSource
-      value: 
-      objectReference: {fileID: 8300000, guid: 058b93da7ac5c1c48b895020a8366984, type: 3}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 3022f75936327b647a17e48e3d506366, type: 3}
 --- !u!1 &1832731514
 GameObject:
   m_ObjectHideFlags: 0
