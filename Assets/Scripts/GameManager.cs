@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public Player player;
+    public 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -15,4 +18,12 @@ public class GameManager : MonoBehaviour
     {
         
     }
+
+    public static void NextStage(string stageName) {
+
+    }
+    public static void End() {
+
+    }
+
 }

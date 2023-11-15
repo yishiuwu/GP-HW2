@@ -5,9 +5,8 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    public float forwardSpeed = 10.0f;
-    public float backwardSpeed = 10.0f;
-    public float rotateSpeed = 2.0f;
+    public float speed = 10.0f;
+    // public float rotateSpeed = 2.0f;
     private Animator animator;
     private Rigidbody rb;
 
@@ -35,24 +34,19 @@ public class PlayerController : MonoBehaviour
         AnimatorStateInfo state = animator.GetCurrentAnimatorStateInfo(0);
 
         // Get Input using the new Input System
-        float v = Keyboard.current.wKey.isPressed ? 1.0f : (Keyboard.current.sKey.isPressed ? -1.0f : 0.0f);
-        float h = Keyboard.current.aKey.isPressed ? -1.0f : (Keyboard.current.dKey.isPressed ? 1.0f : 0.0f);
+        float v = Keyboard.current.wKey.isPressed ? 1.0f * speed : (Keyboard.current.sKey.isPressed ? -1.0f * speed : 0.0f);
+        float h = Keyboard.current.aKey.isPressed ? -1.0f * speed : (Keyboard.current.dKey.isPressed ? 1.0f * speed : 0.0f);
 
-        animator.SetFloat("Speed", v);
 
-        Vector3 velocity = new Vector3(0.0f, 0.0f, v);
+        Vector3 velocity = new Vector3(h, 0.0f, v);
+        animator.SetFloat("Speed", velocity.magnitude);
 
         // Transform
-        gameObject.transform.Rotate(0, h * rotateSpeed, 0);
-
-        if (v < -0.1)
-        {
-            //gameObject.transform.Translate(velocity * backwardSpeed * Time.fixedDeltaTime);
-        }
-        else if (v > 0.1)
-        {
-            gameObject.transform.Translate(velocity * forwardSpeed * Time.fixedDeltaTime);
-        }
+        // gameObject.transform.Rotate(0, h * rotateSpeed, 0);
+        // transform.Translate(velocity * Time.fixedDeltaTime);
+        rb.velocity = velocity;
+        Quaternion rotate = velocity.magnitude==0 ? transform.rotation : Quaternion.LookRotation(velocity);
+        transform.SetPositionAndRotation(transform.position, rotate);
 
         if (state.fullPathHash == runState)
         {
