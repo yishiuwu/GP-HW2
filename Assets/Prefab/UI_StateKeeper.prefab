@@ -246,7 +246,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4527476760071550724
 RectTransform:
   m_ObjectHideFlags: 0
@@ -618,8 +618,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9eed312af05e644d909b1be0c3f8e92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerHP: 0
-  maxPlayerHP: 100
   greenHP: {fileID: 4527476760082023606}
   redHP: {fileID: 4527476759995474072}
 --- !u!114 &4527476760272719137
@@ -635,7 +633,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreText: {fileID: 4527476760949001327}
-  score: 0
 --- !u!1 &4527476760276818574
 GameObject:
   m_ObjectHideFlags: 0
@@ -1004,7 +1001,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4527476760386130352
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1138,7 +1135,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4527476760620796199
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1272,7 +1269,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4527476760945876689
 RectTransform:
   m_ObjectHideFlags: 0
