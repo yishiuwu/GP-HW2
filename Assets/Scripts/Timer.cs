@@ -26,7 +26,10 @@ public class Timer : MonoBehaviour
     IEnumerator timerCoroutine(){
         yield return new WaitForSeconds(1);
         timer -= 1;
-        start_timer = true;
+        if(timer > 0)
+            start_timer = true;
+        else
+            GameManager.Lose();
     }
 
     // Update is called once per frame
@@ -35,7 +38,6 @@ public class Timer : MonoBehaviour
         if(start_timer){
             StartCoroutine("timerCoroutine");
             start_timer = false;
-
         }
         timerText.text = timer.ToString();
         timerImage.GetComponent<Image>().fillAmount = Mathf.Lerp(0, 1, timer / maxTime);

@@ -38,6 +38,6 @@ public class ScoreControl : MonoBehaviour
     }
 
     public void testReLoad(){
-        SceneManager.LoadScene("CameraTestScene");
+        FindObjectOfType<SceneTransition>().ChangeScene("ReloadTestScene");
     }
 }
