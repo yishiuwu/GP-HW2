@@ -1601,7 +1601,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 494407602, guid: 8c30e5ea8ee65c247b1e2480eccd72c8, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 18.5235
+      value: 15.95
       objectReference: {fileID: 0}
     - target: {fileID: 748422567, guid: 8c30e5ea8ee65c247b1e2480eccd72c8, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
