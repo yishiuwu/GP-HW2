@@ -36,12 +36,12 @@ public class PlayerController : MonoBehaviour
         myAudioSource = GetComponent<AudioSource>();
         StaticStart();
 
-        GameManager.onGameLose += CallOnEnd;
-        GameManager.onGameWin += CallOnEnd;
+        GameManager.onGameLose += CallOnLose;
+        GameManager.onGameWin += CallOnWin;
 
         GameManager.onStageChange += () => {
-            GameManager.onGameLose -= CallOnEnd;
-            GameManager.onGameWin -= CallOnEnd;
+            GameManager.onGameLose -= CallOnLose;
+            GameManager.onGameWin -= CallOnWin;
         };
 
         modifyScore += () => {
@@ -55,15 +55,20 @@ public class PlayerController : MonoBehaviour
         GameManager.onGameRestart += ()=>{isEnd = false;};
     }
 
-    void CallOnEnd() {
+    void CallOnWin() {
         rb.velocity = Vector3.zero;
     }
 
-    // private void OnDestroy() {
-    //     Debug.Log("player con destroy");
-    //     GameManager.onGameLose -= ()=>{this.rb.velocity = Vector3.zero;};
-    //     GameManager.onGameWin -= ()=>{this.rb.velocity = Vector3.zero;};
-    // }
+    void CallOnLose() {
+        rb.velocity = Vector3.zero;
+        Destroy(gameObject);
+    }
+
+    private void OnDestroy() {
+        Debug.Log("player con destroy");
+        GameManager.onGameLose -= CallOnLose;
+        GameManager.onGameWin -= CallOnWin;
+    }
 
     void FixedUpdate()
     {
