@@ -15,10 +15,16 @@ public class TurtleEnemy : MonoBehaviour
     private bool attacking = false;
     private bool isCoolDown = false;
     public GameObject blood;
+
+    public float subHP = -20;
+    public event System.Action hurtPlayer;
+
     // Start is called before the first frame update
     void Start()
     {
         myAudioSource = GetComponent<AudioSource>();
+        hurtPlayer += () => {player.GetComponent<PlayerController>().Hurt();};
+        hurtPlayer += () => {PlayerStateControl.AddPlayerHP(subHP);};
     }
 
     // Update is called once per frame
@@ -53,6 +59,7 @@ public class TurtleEnemy : MonoBehaviour
     private void PlayAttackSound(){
         AudioSystem.PlaySE(AttackSound);
         Debug.Log("attacking");
+        hurtPlayer?.Invoke();
         isCoolDown = true;
         StartCoroutine(WaitForCoolDown(2f));
     }

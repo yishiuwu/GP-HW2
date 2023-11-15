@@ -15,11 +15,17 @@ public class SlimeEnemy : MonoBehaviour
     private float direction = 1f;
     private float distance = 0f;
     public GameObject blood;
+
+    public float subHP = -10;
+    public event System.Action hurtPlayer;
+
     // Start is called before the first frame update
     void Start()
     {
         myAudioSource = GetComponent<AudioSource>();
         GetComponent<Animator>().SetBool("walk", true);
+        hurtPlayer += () => {player.GetComponent<PlayerController>().Hurt();};
+        hurtPlayer += () => {PlayerStateControl.AddPlayerHP(subHP);};
     }
 
     // Update is called once per frame
@@ -55,6 +61,7 @@ public class SlimeEnemy : MonoBehaviour
             StartCoroutine(WaitForCD(1.5f));
             GameObject obj = Instantiate(blood,transform.position,transform.rotation);
             Destroy(obj,5f);
+            hurtPlayer?.Invoke();
         }
     }
     private void DetectAndDash(){

@@ -72,7 +72,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    static void Hurt(){
+    public void Hurt(){
         AudioSystem.PlaySE(HurtSound);
         GameObject obj = Instantiate(blood,transform.position,transform.rotation);
         Destroy(obj,5f);

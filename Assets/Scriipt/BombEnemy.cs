@@ -14,12 +14,16 @@ public class BombEnemy : MonoBehaviour
     private Vector3 moveDirection;
     private bool Booming = false;
     
+    public float subHP = -15;
+    public event System.Action hurtPlayer;
 
     // Start is called before the first frame update
     void Start()
     {
-       moveDirection = Vector3.zero;
-       myAudioSource = GetComponent<AudioSource>();
+        moveDirection = Vector3.zero;
+        myAudioSource = GetComponent<AudioSource>();
+        hurtPlayer += () => {player.GetComponent<PlayerController>().Hurt();};
+        hurtPlayer += () => {PlayerStateControl.AddPlayerHP(subHP);};
     }
 
     // Update is called once per frame
@@ -78,5 +82,6 @@ public class BombEnemy : MonoBehaviour
     {
         yield return new WaitForSeconds(2f);
         Destroy(gameObject);
+        hurtPlayer?.Invoke();
     }
 }
