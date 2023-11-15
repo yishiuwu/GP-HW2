@@ -72,18 +72,24 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void OnCollisionEnter(Collision other){
-        if(other.gameObject.tag=="Enemy"){
-            //Booming = true;
-            //GetComponent<Animator>().SetTrigger("attack01");
-            myAudioSource.PlayOneShot(HurtSound);
-            GameObject obj = Instantiate(blood,transform.position,transform.rotation);
-            Destroy(obj,5f);
-            //StartCoroutine(SelfDestroy());
-        }
-        Debug.Log("Collision!");
-
+    static void Hurt(){
+        AudioSystem.PlaySE(HurtSound);
+        GameObject obj = Instantiate(blood,transform.position,transform.rotation);
+        Destroy(obj,5f);
     }
+
+    // void OnCollisionEnter(Collision other){
+    //     if(other.gameObject.tag=="Enemy"){
+    //         //Booming = true;
+    //         //GetComponent<Animator>().SetTrigger("attack01");
+    //         AudioSystem.PlaySE(HurtSound);
+    //         GameObject obj = Instantiate(blood,transform.position,transform.rotation);
+    //         Destroy(obj,5f);
+    //         //StartCoroutine(SelfDestroy());
+    //     }
+    //     Debug.Log("Collision!");
+
+    // }
 
     void DestroyNearbyEnemies()
 {
