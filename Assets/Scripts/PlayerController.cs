@@ -74,6 +74,7 @@ public class PlayerController : MonoBehaviour
             Destroy(obj,5f);
             //StartCoroutine(SelfDestroy());
         }
+        Debug.Log("Collision!");
 
     }
 
