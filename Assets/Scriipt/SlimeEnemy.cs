@@ -51,7 +51,7 @@ public class SlimeEnemy : MonoBehaviour
         if(other.gameObject.tag=="Player"){
             // GetComponent<Animator>().SetBool("attack02",true);
             // Debug.Log("Slime Attack!!");
-            myAudioSource.PlayOneShot(AttackSound);
+            AudioSystem.PlaySE(AttackSound);
             StartCoroutine(WaitForCD(1.5f));
             GameObject obj = Instantiate(blood,transform.position,transform.rotation);
             Destroy(obj,5f);
