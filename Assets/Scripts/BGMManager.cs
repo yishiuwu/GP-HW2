@@ -9,12 +9,12 @@ public class BGMManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        AudioSystem.SetBgm(audioSource);  
+        AudioSystem.SetBgm(audioSource); 
+        AudioSystem.PlayBgm(); 
     }
 
     // Update is called once per frame
     void Update()
     {
-        
     }
 }
