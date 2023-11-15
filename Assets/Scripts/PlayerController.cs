@@ -18,6 +18,9 @@ public class PlayerController : MonoBehaviour
     public GameObject blood;
     public GameObject bomb;
 
+    public int addScore = 20;
+    public event System.Action modifyScore;
+
     // Use this for initialization
     void Start()
     {
@@ -27,6 +30,10 @@ public class PlayerController : MonoBehaviour
         runState = Animator.StringToHash("Base Layer.Run");
         attackState = Animator.StringToHash("Base Layer.Attack");
         myAudioSource = GetComponent<AudioSource>();
+
+        modifyScore += () => {
+            ScoreControl.AddScore(addScore);
+        };
     }
 
     void FixedUpdate()
@@ -92,7 +99,7 @@ public class PlayerController : MonoBehaviour
         {
             // Destroy the enemy
             Destroy(col.gameObject);
-
+            modifyScore?.Invoke();
             // Play a sound or perform other actions if needed
             // For example, you can instantiate a blood effect
             // GameObject bloodObj = Instantiate(blood, col.transform.position, col.transform.rotation);
