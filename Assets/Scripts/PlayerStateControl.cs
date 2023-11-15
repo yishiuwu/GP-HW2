@@ -11,7 +11,7 @@ public class PlayerStateControl : MonoBehaviour
     public Image redHP;
 
     Image ShowUpHP, ClosedHP;
-    
+
 
     // Start is called before the first frame update
     void Start()
@@ -26,7 +26,7 @@ public class PlayerStateControl : MonoBehaviour
         ManageShowUpHP();
     }
 
-    public void AddPlayerHP(float hp){
+    public static void AddPlayerHP(float hp){
         playerHP += hp;
         if(playerHP / maxPlayerHP <= 0.2f){
             ShowUpHP = redHP;
