@@ -25,7 +25,7 @@ public class StateKeeper : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(SceneManager.GetActiveScene().name != "CameraTestScene" && SceneManager.GetActiveScene().name != "scene1" && SceneManager.GetActiveScene().name != "scene2" && && SceneManager.GetActiveScene().name != "scene3")
+        if(SceneManager.GetActiveScene().name != "CameraTestScene" && SceneManager.GetActiveScene().name != "scene1" && SceneManager.GetActiveScene().name != "scene2" && SceneManager.GetActiveScene().name != "scene3")
             Destroy(gameObject);
     }
 }
