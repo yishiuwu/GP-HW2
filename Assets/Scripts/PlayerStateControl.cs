@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerStateControl : MonoBehaviour
 {
@@ -16,7 +17,8 @@ public class PlayerStateControl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        ResetPlayerHP();
+        if(SceneManager.GetActiveScene().name == "scene1")
+            ResetPlayerHP();
     }
 
     public static void ResetPlayerHP(){
