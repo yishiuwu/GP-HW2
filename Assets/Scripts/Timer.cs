@@ -13,6 +13,7 @@ public class Timer : MonoBehaviour
     public float maxTime = 300;
     public bool start_timer;
     private static bool isEnd = false;
+    public static bool IsEnd { get { return isEnd; } }
 
     // Start is called before the first frame update
     void Start()
@@ -20,8 +21,8 @@ public class Timer : MonoBehaviour
         timer = maxTime;
         start_timer = true;
         StartCoroutine(TimerCoroutine());
-        GameManager.onGameLose += ()=>{StopCoroutine(TimerCoroutine());};
-        GameManager.onGameWin += ()=>{StopCoroutine(TimerCoroutine());};
+        GameManager.onGameLose += () => { StopAllCoroutines(); };
+        GameManager.onGameWin += () => { StopAllCoroutines(); };
         StaticStart();
     }
 
