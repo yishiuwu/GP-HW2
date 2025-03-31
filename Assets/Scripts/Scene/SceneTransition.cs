@@ -12,6 +12,7 @@ public class SceneTransition : MonoBehaviour
     public Color outColor;
     public float outTime = 1.0f;
     ColorEffect effect;
+    static private bool isChanging = false;
     
     private static SceneTransition instance = null;
     void Awake()
@@ -37,10 +38,15 @@ public class SceneTransition : MonoBehaviour
     }
 
     public void ChangeScene(String sceneName) {
+        if (isChanging) {
+            Debug.Log("Scene is on-loading");
+            return;
+        }
         Debug.Log("Change to scene: " + sceneName);
         AsyncOperation task = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Single);
         task.allowSceneActivation = false;
-        Debug.Log(instance);
-        instance.effect.StartFade(instance.outColor, instance.outTime, ()=>{task.allowSceneActivation = true;});
+        // Debug.Log(instance);
+        isChanging = true;
+        instance.effect.StartFade(instance.outColor, instance.outTime, ()=>{task.allowSceneActivation = true; isChanging = false;});
     }
 }

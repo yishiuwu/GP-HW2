@@ -10,7 +10,11 @@ public class ColorEffect : MonoBehaviour
     void Awake()
     {
         image = GetComponent<Image>();
+        image.alphaHitTestMinimumThreshold = 0.0f;
         // Debug.Log(image.ToString());
+    }
+    void Start() {
+        // image = GetComponent<Image>();
     }
 
     IEnumerator Fade(Color to, float duration, System.Action callback) {
